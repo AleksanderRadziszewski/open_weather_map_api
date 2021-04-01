@@ -1,12 +1,10 @@
-from itertools import count
-from operator import index
 from datetime import datetime
 from rest_framework.response import Response
 from rest_framework.views import APIView
 import requests
 import os
 import json
-from datetime import date, timedelta
+from datetime import timedelta
 
 
 class ApiWeatherView(APIView):
