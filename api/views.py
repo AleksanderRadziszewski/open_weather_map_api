@@ -34,7 +34,7 @@ class ApiWeatherView(APIView):
                 list_dates.append(converted_hour.isoformat())
         with open("api/json.txt", "w") as outfile:
             json.dump(data_requests, outfile, indent=4)
-        with open("api/date and hours.txt","w") as dates_hours:
+        with open("api/dates_and_hours.txt","w") as dates_hours:
             for row in list_dates:
                 dates_hours.write(str(row) + "\n")
         return Response(data_requests)
