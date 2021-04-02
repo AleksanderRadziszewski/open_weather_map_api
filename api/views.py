@@ -31,7 +31,7 @@ class ApiWeatherView(APIView):
             for hour in day["hourly"]:
                 converted_hour = datetime.fromtimestamp(hour["dt"])
                 list_dates.append(converted_hour.isoformat())
-                temp = round(float(hour["temp"]),2)
+                temp = format(float(hour["temp"]), '.2f')
                 time = converted_hour.time()
                 date = converted_hour.date()
                 Temperature.objects.create(temp=temp, date=date, time=time)
