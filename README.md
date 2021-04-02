@@ -15,3 +15,8 @@ https://openweathermap.org/api/hourly-forecast. Then I use timemachine which all
 ## 3. Dates and hours of 3 days forecast, and saving in dates_and_hours.txt
 
 ![Zrzut ekranu 2021-04-2 o 13 42 23](https://user-images.githubusercontent.com/56914063/113413048-0e6a9c00-93ba-11eb-8e3a-c8ea96c0ce8d.png)
+
+## 4.Temperatures in particular date and time.
+
+![Zrzut ekranu 2021-04-2 o 14 41 55](https://user-images.githubusercontent.com/56914063/113416874-7e7d2000-93c2-11eb-9940-d22efad45321.png)
+
