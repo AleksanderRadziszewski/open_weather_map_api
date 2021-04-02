@@ -5,6 +5,7 @@ import requests
 import os
 import json
 from datetime import timedelta
+from .models import Temperature
 
 
 class ApiWeatherView(APIView):
@@ -30,9 +31,13 @@ class ApiWeatherView(APIView):
             for hour in day["hourly"]:
                 converted_hour = datetime.fromtimestamp(hour["dt"])
                 list_dates.append(converted_hour.isoformat())
+                temp = round(float(hour["temp"]),2)
+                time = converted_hour.time()
+                date = converted_hour.date()
+                Temperature.objects.create(temp=temp, date=date, time=time)
         with open("api/json.txt", "w") as outfile:
             json.dump(data_requests, outfile, indent=4)
-        with open("api/dates_and_hours.txt","w") as dates_hours:
+        with open("api/dates_and_hours.txt", "w") as dates_hours:
             for row in list_dates:
                 dates_hours.write(str(row) + "\n")
         return Response(data_requests)
