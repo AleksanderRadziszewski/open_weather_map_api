@@ -1,4 +1,5 @@
-# open_weather_map_api
+
+# Project description
 
 This project aim to get forecast for previous 3 days before currently day. This project use django rest framework where I send api request on 
 https://openweathermap.org/api/hourly-forecast. Then I use timemachine which allow me to get three days hourly forcast before currently day.
