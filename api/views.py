@@ -19,6 +19,7 @@ class ApiWeatherView(APIView):
         days = 3
         list_dates = []
         data_requests = []
+        list_temps = []
         for day in range(1, days + 1):
             forecast_date = now - timedelta(days=day)
             dt = int(datetime.timestamp(forecast_date))
@@ -26,17 +27,16 @@ class ApiWeatherView(APIView):
                   f"lat={lat}&lon={lon}&dt={dt}&units={units}&appid={api_key}"
             data_request = requests.get(url)
             data_requests.append(data_request.json())
-        print(data_requests)
         for day in data_requests:
-            for hour in day["hourly"]:
-                converted_hour = datetime.fromtimestamp(hour["dt"])
+
+            list_length = len(day["hourly"])
+            for hour in range(1, list_length):
+                converted_hour = datetime.fromtimestamp(day["hourly"][hour]["dt"])
                 list_dates.append(converted_hour.isoformat())
-                temp = format(float(hour["temp"]), '.2f')
-                time = converted_hour.time()
-                date = converted_hour.date()
-                Temperature.objects.create(temp=temp, date=date, time=time)
+                if day["hourly"][hour]["temp"] > day["hourly"][hour - 1]["temp"]:
+                    list_temps.append(day["hourly"][hour])
         with open("api/json.txt", "w") as outfile:
-            json.dump(data_requests, outfile, indent=4)
+            json.dump(list_temps, outfile, indent=4)
         with open("api/dates_and_hours.txt", "w") as dates_hours:
             for row in list_dates:
                 dates_hours.write(str(row) + "\n")
