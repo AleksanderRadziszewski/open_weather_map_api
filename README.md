@@ -8,7 +8,7 @@ https://openweathermap.org/api/hourly-forecast. Then I use timemachine which all
 
 ![Zrzut ekranu 2021-04-2 o 13 41 18](https://user-images.githubusercontent.com/56914063/113413139-3954f000-93ba-11eb-9120-de1e23020a65.png)
 
-## 2. Hourly forecast for previous 3 days, and saving as a json.txt file
+## 2. The time when temperature was started to rise, for previous 3 days forecast, and saving as a json.txt file
 
 ![Zrzut ekranu 2021-04-2 o 13 42 43](https://user-images.githubusercontent.com/56914063/113412925-cf3c4b00-93b9-11eb-934c-f6d64f859b5d.png)
 
@@ -16,7 +16,4 @@ https://openweathermap.org/api/hourly-forecast. Then I use timemachine which all
 
 ![Zrzut ekranu 2021-04-2 o 13 42 23](https://user-images.githubusercontent.com/56914063/113413048-0e6a9c00-93ba-11eb-8e3a-c8ea96c0ce8d.png)
 
-## 4.Temperatures in particular date and time.
-
-![Zrzut ekranu 2021-04-2 o 14 41 55](https://user-images.githubusercontent.com/56914063/113416874-7e7d2000-93c2-11eb-9940-d22efad45321.png)
 
