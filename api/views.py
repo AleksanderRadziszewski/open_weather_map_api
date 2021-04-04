@@ -5,7 +5,6 @@ import requests
 import os
 import json
 from datetime import timedelta
-from .models import Temperature
 
 
 class ApiWeatherView(APIView):
