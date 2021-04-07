@@ -10,11 +10,13 @@ https://openweathermap.org/api/hourly-forecast. Then I use timemachine which all
 
 ## 2. The time when temperature was started to rise, for previous 3 days forecast, and saving as a json.txt file
 
-![Zrzut ekranu 2021-04-4 o 19 45 39](https://user-images.githubusercontent.com/56914063/113517098-66ea9680-957e-11eb-9378-39307fff56d0.png)
+![Zrzut ekranu 2021-04-6 o 14 37 14](https://user-images.githubusercontent.com/56914063/113711743-9b2c9700-96e5-11eb-820a-cecb709f76f5.png)
+
 
 
 ## 3. Dates and hours of 3 days forecast, and saving in dates_and_hours.txt
 
-![Zrzut ekranu 2021-04-2 o 13 42 23](https://user-images.githubusercontent.com/56914063/113413048-0e6a9c00-93ba-11eb-8e3a-c8ea96c0ce8d.png)
+![Zrzut ekranu 2021-04-6 o 14 36 37](https://user-images.githubusercontent.com/56914063/113711655-82bc7c80-96e5-11eb-9094-9d68e643154b.png)
+
 
 
