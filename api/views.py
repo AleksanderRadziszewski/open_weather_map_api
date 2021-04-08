@@ -20,24 +20,24 @@ class ApiWeatherView(APIView):
         list_dates_end = []
         data_requests = []
         list_objects = []
-        index = 0
-        for day in range(1, days + 1):
+        for day in range(1,days+1):
             forecast_date = now - timedelta(days=day)
             dt = int(datetime.timestamp(forecast_date))
             url = f"http://api.openweathermap.org/data/2.5/onecall/timemachine?" \
                   f"lat={lat}&lon={lon}&dt={dt}&units={units}&appid={api_key}"
             data_request = requests.get(url)
             data_requests.append(data_request.json())
+
         for day in data_requests:
             list_length = len(day["hourly"])
-            for hour in range(list_length - 1):
-                if day["hourly"][hour]["temp"] < day["hourly"][hour + 1]["temp"]:
-                    converted_temp_growth = datetime.fromtimestamp(day["hourly"][hour]["dt"])
-                    list_dates_start.append(converted_temp_growth.isoformat())
-                    list_objects.append(day["hourly"][hour])
-                    index = hour + 1
-                elif day["hourly"][hour+1]["temp"] >= day["hourly"][index+1]["temp"]:
-                    list_dates_end.append(day["hourly"][index+1]["temp"])
+            index = 0
+            for hour in range(1, list_length):
+                if day["hourly"][hour-1]["temp"] <= day["hourly"][hour]["temp"]:
+                    list_dates_start.append(day["hourly"][hour]["temp"])
+                    list_objects.append(day["hourly"][hour]["temp"])
+                    index = hour
+            if day["hourly"][index+1]["temp"] < day["hourly"][index]["temp"]:
+                list_dates_end.append(day["hourly"][index]["temp"])
         with open("api/json.txt", "w") as outfile:
             json.dump(list_objects, outfile, indent=4)
         with open("api/dates_and_hours.txt", "w") as dates_hours:
