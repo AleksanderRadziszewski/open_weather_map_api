@@ -1,10 +1,10 @@
-from datetime import datetime
 from rest_framework.response import Response
 from rest_framework.views import APIView
 import requests
 import os
 import json
-from datetime import timedelta
+from datetime import timedelta, datetime
+
 
 
 class ApiWeatherView(APIView):
@@ -16,11 +16,12 @@ class ApiWeatherView(APIView):
         units = "imperial"
         now = datetime.now()
         days = 3
-        list_dates_start = []
-        list_dates_end = []
+        delta = timedelta(days=1, minutes=1)
+        list_start = []
+        list_end = []
         data_requests = []
         list_objects = []
-        for day in range(1,days+1):
+        for day in range(1, days + 1):
             forecast_date = now - timedelta(days=day)
             dt = int(datetime.timestamp(forecast_date))
             url = f"http://api.openweathermap.org/data/2.5/onecall/timemachine?" \
@@ -30,17 +31,31 @@ class ApiWeatherView(APIView):
 
         for day in data_requests:
             list_length = len(day["hourly"])
-            index = 0
+            local_start = []
+            local_end = []
+            item = day["hourly"]
             for hour in range(1, list_length):
-                if day["hourly"][hour-1]["temp"] <= day["hourly"][hour]["temp"]:
-                    list_dates_start.append(day["hourly"][hour]["temp"])
-                    list_objects.append(day["hourly"][hour]["temp"])
-                    index = hour
-            if day["hourly"][index+1]["temp"] < day["hourly"][index]["temp"]:
-                list_dates_end.append(day["hourly"][index]["temp"])
+                if item[hour - 1]["temp"] < item[hour]["temp"]:
+                    local_start.append(item[hour - 1])
+                    local_end.append(item[hour])
+            list_start.append(local_start)
+            list_end.append(local_end)
+
+        for filter_temp in list_start:
+            local_filter = []
+            for dt in range(1,len(filter_temp)):
+                timestamp_1 = filter_temp[dt - 1]["dt"]
+                timestamp_2 = filter_temp[dt]["dt"]
+                time_1 = datetime.fromtimestamp(timestamp_1)
+                time_2 = datetime.fromtimestamp(timestamp_2)
+                local_filter.append(filter_temp[0])
+                if time_2 == time_1 + delta:
+                    local_filter.append(filter_temp[dt])
+                list_objects.append(local_filter)
+
         with open("api/json.txt", "w") as outfile:
             json.dump(list_objects, outfile, indent=4)
         with open("api/dates_and_hours.txt", "w") as dates_hours:
-            for row in list_dates_start:
+            for row in list_start:
                 dates_hours.write(str(row) + "\n")
         return Response(data_requests)
