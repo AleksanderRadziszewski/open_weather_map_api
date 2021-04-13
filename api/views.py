@@ -16,7 +16,7 @@ class ApiWeatherView(APIView):
         units = "imperial"
         now = datetime.now()
         days = 3
-        delta = timedelta(days=1, minutes=1)
+        delta = timedelta(hours=1)
         list_start = []
         list_end = []
         data_requests = []
@@ -38,24 +38,24 @@ class ApiWeatherView(APIView):
                 if item[hour - 1]["temp"] < item[hour]["temp"]:
                     local_start.append(item[hour - 1])
                     local_end.append(item[hour])
+            local_start.append(local_end[-1])
             list_start.append(local_start)
             list_end.append(local_end)
 
         for filter_temp in list_start:
             local_filter = []
+
             for dt in range(1,len(filter_temp)):
                 timestamp_1 = filter_temp[dt - 1]["dt"]
                 timestamp_2 = filter_temp[dt]["dt"]
                 time_1 = datetime.fromtimestamp(timestamp_1)
                 time_2 = datetime.fromtimestamp(timestamp_2)
-                local_filter.append(filter_temp[0])
                 if time_2 == time_1 + delta:
                     local_filter.append(filter_temp[dt])
-                list_objects.append(local_filter)
-
+            list_objects.append(local_filter)
         with open("api/json.txt", "w") as outfile:
             json.dump(list_objects, outfile, indent=4)
         with open("api/dates_and_hours.txt", "w") as dates_hours:
             for row in list_start:
                 dates_hours.write(str(row) + "\n")
-        return Response(data_requests)
+        return Response(list_objects)
