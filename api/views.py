@@ -6,7 +6,6 @@ import json
 from datetime import timedelta, datetime
 
 
-
 class ApiWeatherView(APIView):
 
     def get(self, request):
@@ -17,8 +16,6 @@ class ApiWeatherView(APIView):
         now = datetime.now()
         days = 3
         delta = timedelta(hours=1)
-        list_start = []
-        list_end = []
         data_requests = []
         list_objects = []
         for day in range(1, days + 1):
@@ -31,31 +28,21 @@ class ApiWeatherView(APIView):
 
         for day in data_requests:
             list_length = len(day["hourly"])
-            local_start = []
-            local_end = []
+            local = []
             item = day["hourly"]
+
             for hour in range(1, list_length):
                 if item[hour - 1]["temp"] < item[hour]["temp"]:
-                    local_start.append(item[hour - 1])
-                    local_end.append(item[hour])
-            local_start.append(local_end[-1])
-            list_start.append(local_start)
-            list_end.append(local_end)
-
-        for filter_temp in list_start:
-            local_filter = []
-
-            for dt in range(1,len(filter_temp)):
-                timestamp_1 = filter_temp[dt - 1]["dt"]
-                timestamp_2 = filter_temp[dt]["dt"]
-                time_1 = datetime.fromtimestamp(timestamp_1)
-                time_2 = datetime.fromtimestamp(timestamp_2)
-                if time_2 == time_1 + delta:
-                    local_filter.append(filter_temp[dt])
-            list_objects.append(local_filter)
+                    local.append(item[hour - 1])
+                    timestamp_1 = local[-1]["dt"]
+                    timestamp_2 = item[hour]["dt"]
+                    time_1 = datetime.fromtimestamp(timestamp_1)
+                    time_2 = datetime.fromtimestamp(timestamp_2)
+                    if time_2 == time_1 + delta and item[hour + 1]["temp"] < item[hour]["temp"]:
+                        local.append(item[hour])
+                        local_2 = local.copy()
+                        list_objects.append(local_2)
+                        local.clear()
         with open("api/json.txt", "w") as outfile:
             json.dump(list_objects, outfile, indent=4)
-        with open("api/dates_and_hours.txt", "w") as dates_hours:
-            for row in list_start:
-                dates_hours.write(str(row) + "\n")
         return Response(list_objects)
