@@ -38,11 +38,25 @@ class ApiWeatherView(APIView):
                     timestamp_2 = item[hour]["dt"]
                     time_1 = datetime.fromtimestamp(timestamp_1)
                     time_2 = datetime.fromtimestamp(timestamp_2)
-                    if time_2 == time_1 + delta and item[hour + 1]["temp"] < item[hour]["temp"]:
-                        local.append(item[hour])
-                        local_2 = local.copy()
-                        list_objects.append(local_2)
-                        local.clear()
+                    try:
+                        if time_2 == time_1 + delta and item[hour + 1]["temp"] < item[hour]["temp"]:
+                            local.append(item[hour])
+                            local_2 = local.copy()
+                            list_objects.append(local_2)
+                            local.clear()
+                    except IndexError:
+                        pass
+        for last in list_objects:
+            time_start = datetime.fromtimestamp(last[0]["dt"])
+            time_end = datetime.fromtimestamp(last[-1]["dt"])
+            duration = time_end - time_start
+            duration_seconds = int(duration.total_seconds())
+            secs_in_a_hour = 3600
+            hours, seconds = divmod(duration_seconds, secs_in_a_hour)
+            data = {"start_time_growth": time_start.isoformat(),
+                    "duration_of_growth": f"{hours} hours",
+                    "end_time_growth": time_end.isoformat()}
+            last.insert(0, data)
         with open("api/json.txt", "w") as outfile:
             json.dump(list_objects, outfile, indent=4)
         return Response(list_objects)
