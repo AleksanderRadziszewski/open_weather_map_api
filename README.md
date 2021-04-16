@@ -10,13 +10,13 @@ https://openweathermap.org/api/hourly-forecast. Then I use timemachine which all
 
 ## 2. The time when temperature was started to rise, for previous 3 days forecast, and saving as a json.txt file
 
-![Zrzut ekranu 2021-04-6 o 14 37 14](https://user-images.githubusercontent.com/56914063/113711743-9b2c9700-96e5-11eb-820a-cecb709f76f5.png)
+![Zrzut ekranu 2021-04-16 o 18 23 34](https://user-images.githubusercontent.com/56914063/115054810-f2e6b180-9ee0-11eb-94e7-e304cf42b1b4.png)
 
 
+## 3. Data of temperature growth. Django Rest Framework GUI.
 
-## 3. Dates and hours of 3 days forecast, and saving in dates_and_hours.txt
+![Zrzut ekranu 2021-04-16 o 18 20 26](https://user-images.githubusercontent.com/56914063/115054896-13af0700-9ee1-11eb-9050-deba70e67702.png)
 
-![Zrzut ekranu 2021-04-6 o 14 36 37](https://user-images.githubusercontent.com/56914063/113711655-82bc7c80-96e5-11eb-9094-9d68e643154b.png)
 
 
 
