@@ -18,6 +18,7 @@ class ApiWeatherView(APIView):
         delta = timedelta(hours=1)
         data_requests = []
         list_objects = []
+        temperature_jumps = []
         for day in range(1, days + 1):
             forecast_date = now - timedelta(days=day)
             dt = int(datetime.timestamp(forecast_date))
@@ -57,6 +58,15 @@ class ApiWeatherView(APIView):
                     "duration_of_growth": f"{hours} hours",
                     "end_time_growth": time_end.isoformat()}
             last.insert(0, data)
+            for step in range(2, len(last)):
+                bigest_distinction_last = round(max([last[step]["temp"] - last[step - 1]["temp"]]), 2)
+                if bigest_distinction_last:
+                    biggest_value_date_last = datetime.fromtimestamp(last[step]["dt"]).isoformat()
+                    lowest_value_date_last = datetime.fromtimestamp(last[step - 1]["dt"]).isoformat()
+                    temperature_jumps.append(
+                        [lowest_value_date_last, biggest_value_date_last, bigest_distinction_last])
+        [print(x) for x in temperature_jumps]
+
         with open("api/json.txt", "w") as outfile:
             json.dump(list_objects, outfile, indent=4)
         return Response(list_objects)
