@@ -64,9 +64,17 @@ class ApiWeatherView(APIView):
                     biggest_value_date_last = datetime.fromtimestamp(last[step]["dt"]).isoformat()
                     lowest_value_date_last = datetime.fromtimestamp(last[step - 1]["dt"]).isoformat()
                     temperature_jumps.append(
-                        [lowest_value_date_last, biggest_value_date_last, bigest_distinction_last])
-        [print(x) for x in temperature_jumps]
+                        (lowest_value_date_last, biggest_value_date_last, bigest_distinction_last))
 
+        current_max_value = None
+        for s,e,v in temperature_jumps:
+            if current_max_value is not None:
+                if v >= current_max_value[2]:
+                    current_max_value=(s,e,v)
+            else:
+                current_max_value = (s,e,v)
+        print("the biggest step"+str(current_max_value))
+        
         with open("api/json.txt", "w") as outfile:
             json.dump(list_objects, outfile, indent=4)
         return Response(list_objects)
