@@ -73,7 +73,11 @@ class ApiWeatherView(APIView):
                     current_max_value=(s,e,v)
             else:
                 current_max_value = (s,e,v)
-        print("the biggest step"+str(current_max_value))
+
+        data_step = {"beginning_time_biggest_step":current_max_value[0],
+                     "ending_time_biggest_step": current_max_value[1],
+                     "value_of_step_one_hour": current_max_value[2]}
+        list_objects.insert(0,data_step)
         
         with open("api/json.txt", "w") as outfile:
             json.dump(list_objects, outfile, indent=4)
