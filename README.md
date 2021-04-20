@@ -29,7 +29,8 @@ https://openweathermap.org/api/hourly-forecast. Then I use timemachine which all
 
 ## 6. Data of the biggest temperature step within one hour.
 
-![Zrzut ekranu 2021-04-20 o 19 03 29](https://user-images.githubusercontent.com/56914063/115436481-55a2ba80-a20b-11eb-82e4-1eebfb858060.png)
+![Zrzut ekranu 2021-04-20 o 19 06 35](https://user-images.githubusercontent.com/56914063/115436694-900c5780-a20b-11eb-953d-382993885464.png)
+
 
 
 
