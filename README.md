@@ -31,6 +31,11 @@ https://openweathermap.org/api/hourly-forecast. Then I use timemachine which all
 
 ![Zrzut ekranu 2021-04-20 o 19 06 35](https://user-images.githubusercontent.com/56914063/115436694-900c5780-a20b-11eb-953d-382993885464.png)
 
+## 7. Average value of humidity and pressure for every period of time while the temperature is rising.
+
+![Zrzut ekranu 2021-04-21 o 12 59 23](https://user-images.githubusercontent.com/56914063/115543502-b54ba500-a2a1-11eb-9c5d-1e7ae6ed2edb.png)
+
+
 
 
 
