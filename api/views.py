@@ -3,6 +3,7 @@ from rest_framework.views import APIView
 import requests
 import os
 import json
+import statistics
 from datetime import timedelta, datetime
 
 
@@ -54,9 +55,15 @@ class ApiWeatherView(APIView):
             duration_seconds = int(duration.total_seconds())
             secs_in_a_hour = 3600
             hours, seconds = divmod(duration_seconds, secs_in_a_hour)
+            humidity_data = [last[humidity_hour]["humidity"] for humidity_hour in range(1, len(last))]
+            pressure_data = [last[pressure_hour]["pressure"] for pressure_hour in range(1, len(last))]
+            humidity_avg = round(statistics.mean(humidity_data),2)
+            pressure_avg = round(statistics.mean(pressure_data),2)
             data = {"start_time_growth": time_start.isoformat(),
                     "duration_of_growth": f"{hours} hours",
-                    "end_time_growth": time_end.isoformat()}
+                    "end_time_growth": time_end.isoformat(),
+                    "humidity_avg": humidity_avg,
+                    "pressure_avg": pressure_avg}
             last.insert(0, data)
             for step in range(2, len(last)):
                 bigest_distinction_last = round(max([last[step]["temp"] - last[step - 1]["temp"]]), 2)
@@ -67,18 +74,18 @@ class ApiWeatherView(APIView):
                         (lowest_value_date_last, biggest_value_date_last, bigest_distinction_last))
 
         current_max_value = None
-        for s,e,v in temperature_jumps:
+        for s, e, v in temperature_jumps:
             if current_max_value is not None:
                 if v >= current_max_value[2]:
-                    current_max_value=(s,e,v)
+                    current_max_value = (s, e, v)
             else:
-                current_max_value = (s,e,v)
+                current_max_value = (s, e, v)
 
-        data_step = {"beginning_time_biggest_step":current_max_value[0],
+        data_step = {"beginning_time_biggest_step": current_max_value[0],
                      "ending_time_biggest_step": current_max_value[1],
                      "value_of_step_one_hour": current_max_value[2]}
-        list_objects.insert(0,data_step)
-        
+        list_objects.insert(0, data_step)
+
         with open("api/json.txt", "w") as outfile:
             json.dump(list_objects, outfile, indent=4)
         return Response(list_objects)
