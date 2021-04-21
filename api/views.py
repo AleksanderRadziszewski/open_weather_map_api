@@ -66,12 +66,12 @@ class ApiWeatherView(APIView):
                     "pressure_avg": pressure_avg}
             last.insert(0, data)
             for step in range(2, len(last)):
-                bigest_distinction_last = round(max([last[step]["temp"] - last[step - 1]["temp"]]), 2)
-                if bigest_distinction_last:
+                biggest_distinction_last = round(max([last[step]["temp"] - last[step - 1]["temp"]]), 2)
+                if biggest_distinction_last:
                     biggest_value_date_last = datetime.fromtimestamp(last[step]["dt"]).isoformat()
                     lowest_value_date_last = datetime.fromtimestamp(last[step - 1]["dt"]).isoformat()
                     temperature_jumps.append(
-                        (lowest_value_date_last, biggest_value_date_last, bigest_distinction_last))
+                        (lowest_value_date_last, biggest_value_date_last, biggest_distinction_last))
 
         current_max_value = None
         for s, e, v in temperature_jumps:
