@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-import api
+import exer_1
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include("api.urls")),
+    path('exer_1/', include("exer_1.urls")),
+    path('exer_2/', include("exer_2.urls"))
 
 ]
