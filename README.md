@@ -10,8 +10,7 @@ https://openweathermap.org/api/hourly-forecast. Then I use timemachine which all
 
 ## 2. The time when temperature was started to rise, for previous 3 days forecast, and saving as a json.txt file
 
-![Zrzut ekranu 2021-04-16 o 18 23 34](https://user-images.githubusercontent.com/56914063/115054810-f2e6b180-9ee0-11eb-94e7-e304cf42b1b4.png)
-
+![Zrzut ekranu 2021-04-21 o 13 09 04](https://user-images.githubusercontent.com/56914063/115544358-c77a1300-a2a2-11eb-8d48-21eb1e31d96a.png)
 
 ## 3. Data of temperature growth. Django Rest Framework GUI.
 
@@ -30,6 +29,12 @@ https://openweathermap.org/api/hourly-forecast. Then I use timemachine which all
 ## 6. Data of the biggest temperature step within one hour.
 
 ![Zrzut ekranu 2021-04-20 o 19 06 35](https://user-images.githubusercontent.com/56914063/115436694-900c5780-a20b-11eb-953d-382993885464.png)
+
+## 7. Average value of humidity and pressure for every period of time while the temperature is rising.
+
+![Zrzut ekranu 2021-04-21 o 13 02 58](https://user-images.githubusercontent.com/56914063/115543767-0bb8e380-a2a2-11eb-87b6-6eda88b8de81.png)
+
+
 
 
 
