@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 
-class ApiWeatherView(APIView):
+class ApiTempStepView(APIView):
 
     def get(self, request):
 
@@ -15,21 +15,11 @@ class ApiWeatherView(APIView):
             list_objects = json.load(json_data)
 
         for last in list_objects:
-            time_start = datetime.fromtimestamp(last[0]["dt"])
-            time_end = datetime.fromtimestamp(last[-1]["dt"])
-            duration = time_end - time_start
-            duration_seconds = int(duration.total_seconds())
-            secs_in_a_hour = 3600
-            hours, seconds = divmod(duration_seconds, secs_in_a_hour)
             humidity_data = [last[humidity_hour]["humidity"] for humidity_hour in range(1, len(last))]
             pressure_data = [last[pressure_hour]["pressure"] for pressure_hour in range(1, len(last))]
             humidity_avg = round(statistics.mean(humidity_data), 2)
             pressure_avg = round(statistics.mean(pressure_data), 2)
-            data = {"start_time_growth": time_start.isoformat(),
-                    "duration_of_growth": f"{hours} hours",
-                    "end_time_growth": time_end.isoformat()}
 
-            last.insert(0, data)
 
             for step in range(2, len(last)):
                 biggest_distinction_last = round(max([last[step]["temp"] - last[step - 1]["temp"]]), 2)

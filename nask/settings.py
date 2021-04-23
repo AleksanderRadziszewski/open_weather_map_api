@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'weather_api',
     'exer_1',
+    'exer_2'
 ]
 
 MIDDLEWARE = [

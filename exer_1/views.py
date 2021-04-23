@@ -6,7 +6,7 @@ import json
 from datetime import timedelta, datetime
 
 
-class ApiWeatherView(APIView):
+class ApiTempGrowthView(APIView):
 
     def get(self, request):
         api_key = os.getenv("api_key")
@@ -46,6 +46,21 @@ class ApiWeatherView(APIView):
                             local.clear()
                     except IndexError:
                         pass
+
+        for last in list_objects:
+            time_start = datetime.fromtimestamp(last[0]["dt"])
+            time_end = datetime.fromtimestamp(last[-1]["dt"])
+            duration = time_end - time_start
+            duration_seconds = int(duration.total_seconds())
+            secs_in_a_hour = 3600
+            hours, seconds = divmod(duration_seconds, secs_in_a_hour)
+
+            data = {"start_time_growth": time_start.isoformat(),
+                    "duration_of_growth": f"{hours} hours",
+                    "initial_temp":f"{last[0]['temp']} C",
+                    "end_temp":f"{last[-1]['temp']} C"}
+
+            last.insert(0, data)
 
         with open("data.json", "w") as outfile:
             json.dump(list_objects, outfile, indent=4)
