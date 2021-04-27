@@ -27,7 +27,7 @@ https://openweathermap.org/api/hourly-forecast. Then I use timemachine which all
 
 ![Zrzut ekranu 2021-04-18 o 22 08 39](https://user-images.githubusercontent.com/56914063/115159459-79db8b80-a093-11eb-9d2e-386f9bb6e94e.png)
 
-## 6. Start time of growth, duration of growth, initial and end temp of growth.
+## 6. Start time of growth, duration of growth, initial and end temp of growth for every period of time when temp increasing.
 
 <img width="779" alt="Zrzut ekranu 2021-04-27 o 13 43 35" src="https://user-images.githubusercontent.com/56914063/116236864-d9a2f800-a75f-11eb-9239-2d77cbd1de57.png">
 
