@@ -27,13 +27,15 @@ https://openweathermap.org/api/hourly-forecast. Then I use timemachine which all
 
 ![Zrzut ekranu 2021-04-18 o 22 08 39](https://user-images.githubusercontent.com/56914063/115159459-79db8b80-a093-11eb-9d2e-386f9bb6e94e.png)
 
-## 6. Data of the biggest temperature step within one hour.
+## 6. Start time of growth, duration of growth, initial and end temp of growth for every period of time when temp increasing.
 
-![Zrzut ekranu 2021-04-20 o 19 06 35](https://user-images.githubusercontent.com/56914063/115436694-900c5780-a20b-11eb-953d-382993885464.png)
+<img width="779" alt="Zrzut ekranu 2021-04-27 o 13 43 35" src="https://user-images.githubusercontent.com/56914063/116236864-d9a2f800-a75f-11eb-9239-2d77cbd1de57.png">
 
-## 7. Average value of humidity and pressure for every period of time while the temperature is rising.
 
-![Zrzut ekranu 2021-04-21 o 13 02 58](https://user-images.githubusercontent.com/56914063/115543767-0bb8e380-a2a2-11eb-87b6-6eda88b8de81.png)
+## 7. Average value of humidity and pressure, initial time, the max value of step in increasing period of time within one hour, lowest value of temp when the max value of step exist, end time of max temp step. 
+
+![Zrzut ekranu 2021-04-27 o 13 50 23](https://user-images.githubusercontent.com/56914063/116238067-39e66980-a761-11eb-928b-c74b56903c2a.png)
+
 
 
 
